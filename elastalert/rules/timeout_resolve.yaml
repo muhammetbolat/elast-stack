@@ -1,0 +1,27 @@
+name: HDM_timeout RESOLVE
+type: flatline
+index: csm_siem_record_solid_local*
+threshold: 10
+timeframe:
+    minutes: 3
+filter:
+- match:
+    message: "HDM"
+
+use_count_query: true
+
+doc_type: _doc
+
+alert: "post"
+http_post_static_payload:
+    alarmId: HDM_timeout
+    alarmText: HDM Cevap var.
+    severity: MAJOR
+    status: 0
+    serviceModel: 1
+http_post_payload:
+    numberOfRecord: num_hits
+    alertDate: '@timestamp'
+
+
+
